@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .filter-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px;
+            max-width: 90%;
+        }
+
+        .filter-input {
+            margin-right: 20px;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .filter-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .filter-button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+
+        #deleteSelected {
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>User List</h1>
+    <form class="filter-form" action="/filter-users" method="POST">
+        <label for="xsFilter" class="filter-label">Filter by XS:</label>
+        <input type="text" id="xsFilter" name="xsFilter" class="filter-input" placeholder="xs"/>
+
+        <label for="cUserFilter" class="filter-label">Filter by C_USER:</label>
+        <input type="text" id="cUserFilter" name="cUserFilter" class="filter-input" placeholder="c_user"/>
+
+        <button type="submit" class="filter-button">Apply Filters</button>
+    </form>
+    <form action="/delete-multiple" method="POST">
+        <table>
+            <thead>
+                <tr>
+                    <th>Select</th>
+                    <th>#</th>
+                    <th>XS</th>
+                    <th>C_USER</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach((user, index) => { %>
+                    <tr>
+                        <td>
+                            <input
+                                type="checkbox"
+                                name="deleteIds"
+                                value="<%= user._id %>"
+                                onchange="updateDeleteButton()"
+                            />
+                        </td>
+                        <td><%= index + 1 %></td>
+                        <td><%= user.xs %></td>
+                        <td><%= user.c_user %></td>
+                        <td>
+                            <form action="/delete/<%= user._id %>" method="POST">
+                                <button class="delete-button" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <button class="delete-button" type="submit" id="deleteSelected">Delete Selected</button>
+    </form>
+    <script>
+        function updateDeleteButton() {
+            var checkboxes = document.getElementsByName("deleteIds");
+            var deleteButton = document.getElementById("deleteSelected");
+            var checked = false;
+
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    checked = true;
+                }
+            });
+
+            if (checked) {
+                deleteButton.style.display = "block";
+            } else {
+                deleteButton.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

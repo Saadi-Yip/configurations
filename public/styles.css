@@ -1,0 +1,78 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  table th,
+  table td {
+    padding: 10px;
+    text-align: left;
+  }
+  
+  table th {
+    background-color: #007BFF;
+    color: #fff;
+  }
+  
+  table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  table tr:hover {
+    background-color: #ddd;
+  }
+  
+  table th,
+  table td {
+    border: 1px solid #ddd;
+  }
+  .delete-button {
+    background-color: #ff4646; /* Red background color */
+    color: #fff; /* White text color */
+    border: none; /* Remove the button border */
+    padding: 8px 16px; /* Add some padding for better appearance */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border-radius: 4px; /* Add rounded corners */
+    font-weight: bold; /* Make text bold */
+    transition: background-color 0.3s ease;
+     /* Add a smooth transition for background color change */
+     margin: 0 auto;
+}
+  @media (max-width: 768px) {
+    table {
+      width: 100%;
+    }
+    .filter-form { 
+      flex-direction: column; 
+      align-items: center;
+      justify-content: center;
+      gap: 10px; 
+    }
+    .filter-input {
+      margin-left: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+  }
+    .filter-label { 
+      display: none;
+    }
+    
+  }
+  

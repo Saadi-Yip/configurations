@@ -1,0 +1,5 @@
+@media screen and (max-width: 588px) {
+    body {
+      background: red !important;
+    }
+  }
